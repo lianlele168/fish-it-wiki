@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://fishit.robloxwikihub.com"),
   title: { default: "Fish It! Wiki (Fisch) — Rod Tier List, Codes & Profit Calculator", template: "%s | Fish It! Wiki" },
-  description: "Ultimate Fish It! (Fisch) guide — active redeem codes, rod tier list, catch profit calculator, fish database, bait guide, enchantments, and fishing spots.",
+  description: "Ultimate Fish It! (Fisch) guide — active redeem codes, rod tier list, catch profit calculator, fish database, bait guide, enchantments, weather totems, boats speed, and quests.",
   openGraph: { type: "website", siteName: "Fish It! Wiki" },
 };
 
@@ -25,8 +25,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/fish-database" className="hover:text-sky-400 transition-colors whitespace-nowrap">🐟 Fish Index</a>
               <a href="/bait-guide" className="hover:text-sky-400 transition-colors whitespace-nowrap">🪱 Baits</a>
               <a href="/enchantments" className="hover:text-sky-400 transition-colors whitespace-nowrap">🔮 Enchants</a>
+              <a href="/potions-totems" className="hover:text-sky-400 transition-colors whitespace-nowrap">🗿 Totems & Potions</a>
+              <a href="/boats-speed" className="hover:text-sky-400 transition-colors whitespace-nowrap">🛥️ Boats</a>
               <a href="/crab-cages" className="hover:text-sky-400 transition-colors whitespace-nowrap">🦀 Crab Cages</a>
               <a href="/locations-map" className="hover:text-sky-400 transition-colors whitespace-nowrap">🗺️ Locations</a>
+              <a href="/quests-merchants" className="hover:text-sky-400 transition-colors whitespace-nowrap">📜 Quests</a>
+              <a href="/aquarium-guide" className="hover:text-sky-400 transition-colors whitespace-nowrap">🏛️ Aquarium</a>
               <a href="/secret-rods-crafting" className="hover:text-sky-400 transition-colors whitespace-nowrap">⚒️ Crafting</a>
               <a href="/beginner-guide" className="hover:text-sky-400 transition-colors whitespace-nowrap">📖 Guide</a>
             </nav>
@@ -43,8 +47,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/fish-database" className="hover:underline">Fish Index</a>
             <a href="/bait-guide" className="hover:underline">Bait Guide</a>
             <a href="/enchantments" className="hover:underline">Enchants</a>
+            <a href="/potions-totems" className="hover:underline">Totems & Potions</a>
+            <a href="/boats-speed" className="hover:underline">Boats Guide</a>
             <a href="/crab-cages" className="hover:underline">Crab Cages</a>
             <a href="/locations-map" className="hover:underline">Locations</a>
+            <a href="/quests-merchants" className="hover:underline">Quests & NPCs</a>
+            <a href="/aquarium-guide" className="hover:underline">Aquarium</a>
             <a href="/secret-rods-crafting" className="hover:underline">Secret Crafting</a>
             <a href="/beginner-guide" className="hover:underline">Beginner Guide</a>
           </div>
