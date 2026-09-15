@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import AuthorCard from "@/components/AuthorCard";
 import { Gift, Anchor, Calculator, Database, Sparkles, ShieldAlert, Waves, Compass, BookOpen, ChevronRight, Check, Copy } from "lucide-react";
 
 export default function HomePage() {
@@ -37,6 +39,38 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* E-E-A-T AUTHOR VERIFICATION */}
+      <AuthorCard />
+
+      {/* VISUAL GAMEPLAY SHOWCASE */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+        <div className="rounded-2xl overflow-hidden border border-cyan-900/60 bg-cyan-950/40 p-4">
+          <Image
+            src="/images/fishit-header.webp"
+            alt="Fish It Official Game Icon"
+            width={512}
+            height={512}
+            className="rounded-xl object-cover w-full h-56 border border-cyan-800/40"
+            priority
+          />
+          <p className="text-xs text-cyan-300 mt-2.5 text-center font-medium">
+            Figure 1: Official Fish It! Icon by Fish Atelier.
+          </p>
+        </div>
+        <div className="rounded-2xl overflow-hidden border border-cyan-900/60 bg-cyan-950/40 p-4">
+          <Image
+            src="/images/fishit-gameplay.webp"
+            alt="Fish It Deep Sea Fishing Arena"
+            width={768}
+            height={432}
+            className="rounded-xl object-cover w-full h-56 border border-cyan-800/40"
+          />
+          <p className="text-xs text-cyan-300 mt-2.5 text-center font-medium">
+            Figure 2: Active Ocean Waters with High-Tier Rod Casting and Reel Mechanics.
+          </p>
+        </div>
+      </div>
 
       {/* Grid of Main Features */}
       <section className="space-y-4">
