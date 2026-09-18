@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com" },
   metadataBase: new URL("https://fishit.robloxwikihub.com"),
   title: { default: "Fish It! Wiki (Fisch) — Rod Tier List, Codes & Profit Calculator", template: "%s | Fish It! Wiki" },
   description: "Ultimate Fish It! (Fisch) guide — active redeem codes, rod tier list, catch profit calculator, fish database, bait guide, enchantments, and weather totems.",
