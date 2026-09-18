@@ -26,7 +26,7 @@ export default function CodesPage() {
   return (
     <div className="space-y-8">
       <div className="border-b border-slate-800 pb-4">
-        <h1 className="text-3xl font-black text-white">Fish It! Codes (August 2026)</h1>
+        <h1 className="text-3xl font-black text-white">Fish It! Codes </h1>
         <p className="text-slate-400 text-sm mt-1">Working promo codes for free Mutation Potions, Cash, and Enchantment Relics in Roblox Fisch.</p>
       </div>
 

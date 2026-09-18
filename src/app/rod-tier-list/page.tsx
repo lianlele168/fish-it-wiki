@@ -44,7 +44,7 @@ export default function RodTierListPage() {
   return (
     <div className="space-y-8">
       <div className="border-b border-slate-800 pb-4">
-        <h1 className="text-3xl font-black text-white">Fish It! Rod Tier List & Stats (August 2026)</h1>
+        <h1 className="text-3xl font-black text-white">Fish It! Rod Tier List & Stats </h1>
         <p className="text-slate-400 text-sm mt-1">Complete ranking of fishing rods in Roblox Fisch, comparing Luck %, Lure Speed, Max Weight, and Control.</p>
       </div>
 

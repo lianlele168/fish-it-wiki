@@ -76,10 +76,10 @@ export const FISH_SPECIES_DATA: FishSpecies[] = [
 ];
 
 export const FISH_CODES_DATA: FishCode[] = [
-  { id: 'code-angler2026', code: 'ANGLER2026', reward: '50,000 C$ + 5x Singularity Bait', status: 'ACTIVE', dateAdded: '2026-08-20' },
-  { id: 'code-deepocean', code: 'DEEPOCEAN', reward: 'Free Carbon Rod + 10x Golden Shrimp', status: 'ACTIVE', dateAdded: '2026-08-10' },
-  { id: 'code-fishatelier', code: 'FISHATELIER', reward: '25,000 C$ + 3x Luck Potion', status: 'ACTIVE', dateAdded: '2026-08-01' },
-  { id: 'code-mineshaft', code: 'MINESHAFT99', reward: 'Super Magnet Lure', status: 'ACTIVE', dateAdded: '2026-07-25' },
-  { id: 'code-krakenhunt', code: 'KRAKENHUNT', reward: '15,000 C$', status: 'ACTIVE', dateAdded: '2026-07-15' },
-  { id: 'code-starterkit', code: 'STARTERBAIT', reward: '50x Earthworms + 5,000 C$', status: 'ACTIVE', dateAdded: '2026-07-01' }
+  { id: 'code-angler2026', code: 'ANGLER2026', reward: '50,000 C$ + 5x Singularity Bait', status: 'ACTIVE', dateAdded: '' },
+  { id: 'code-deepocean', code: 'DEEPOCEAN', reward: 'Free Carbon Rod + 10x Golden Shrimp', status: 'ACTIVE', dateAdded: '' },
+  { id: 'code-fishatelier', code: 'FISHATELIER', reward: '25,000 C$ + 3x Luck Potion', status: 'ACTIVE', dateAdded: '' },
+  { id: 'code-mineshaft', code: 'MINESHAFT99', reward: 'Super Magnet Lure', status: 'ACTIVE', dateAdded: '' },
+  { id: 'code-krakenhunt', code: 'KRAKENHUNT', reward: '15,000 C$', status: 'ACTIVE', dateAdded: '' },
+  { id: 'code-starterkit', code: 'STARTERBAIT', reward: '50x Earthworms + 5,000 C$', status: 'ACTIVE', dateAdded: '' }
 ];
