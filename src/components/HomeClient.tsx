@@ -118,10 +118,10 @@ export default function HomePage() {
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           {[
-            { code: "POTIONSSS", reward: "2x Mutation II Potions" },
-            { code: "MUTATION2", reward: "2x Mutation II Potions" },
-            { code: "MERDEKA", reward: "2x Mutation II Potions" },
-            { code: "Fischfest2026", reward: "Celebration Relic & Cash" },
+            { code: "POTIONSSS", reward: "2x Mutation II Potion" },
+            { code: "MUTATION2", reward: "2x Mutation II Potion" },
+            { code: "CONTRA", reward: "2x Mutation II Potion" },
+            { code: "MERDEKA", reward: "Special lantern" },
           ].map(({ code, reward }) => (
             <div key={code} className="flex items-center justify-between bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
               <div className="space-y-0.5">
