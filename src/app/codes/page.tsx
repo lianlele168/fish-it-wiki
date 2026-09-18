@@ -78,8 +78,8 @@ export default function CodesPage() {
           <strong>Redeem</strong>.
         </p>
         <p className="text-xs text-amber-300/90 leading-relaxed">
-          Note: this is <strong>Fish It!</strong> by Fish Atelier, not Fisch. Codes from one will not
-          work in the other.
+          This is <strong>Fish It!</strong> by Fish Atelier, not Fisch. Codes from one will not work
+          in the other.
         </p>
       </div>
 
