@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/aquarium-guide" },
+};
+
 export default function AquariumGuidePage() {
   const perks = [
     { tier: "25% Bestiary Completion", perk: "+5% Passive C$ Bonus from all fish sales", req: "25 Species Discovered" },

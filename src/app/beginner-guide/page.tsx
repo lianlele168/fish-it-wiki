@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/beginner-guide" },
+};
+
 export default function BeginnerGuidePage() {
   const steps = [
     { title: "1. Start at Moosewood", desc: "Use your free Flimsy Rod to catch basic Moosewood Bass until you reach 900 C$." },

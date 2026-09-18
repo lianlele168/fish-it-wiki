@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/locations-map" },
+};
+
 export default function LocationsMapPage() {
   const spots = [
     { name: "The Mineshaft", tier: "S+ Meta", avgProfit: "150,000+ C$ / Hr", req: "Level 150+", topFish: "Golden Megalodon, Diamond Sturgeon", desc: "Best endgame money spot. Deep pool requires high weight rods." },

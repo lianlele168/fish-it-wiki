@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/secret-rods-crafting" },
+};
+
 export default function SecretRodsCraftingPage() {
   const craftables = [
     { name: "Great Rod of Oscar", levelReq: "Level 250", cost: "2,500,000 C$", mats: "1x Oscar Crystal + 5x Deep Sea Relics", stats: "1050% Luck, 140% Speed", location: "Ancient Archives Altar" },

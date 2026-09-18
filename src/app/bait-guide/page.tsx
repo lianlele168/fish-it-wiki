@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/bait-guide" },
+};
+
 export default function BaitGuidePage() {
   const baits = [
     { name: "Singularity Bait", luck: "+300%", speed: "+50%", cost: "2,500 C$ / crate", target: "Mythic & Exotic Abyssal species", tier: "S+ Meta" },

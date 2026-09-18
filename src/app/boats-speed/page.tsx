@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/boats-speed" },
+};
+
 export default function BoatsSpeedPage() {
   const boats = [
     { name: "Kayak", speed: "100 S/ps", seats: 1, cost: "45,000 C$", vendor: "Wandering Merchant", note: "Fastest solo ocean transport" },

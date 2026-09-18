@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/enchantments" },
+};
+
 export default function EnchantmentsPage() {
   const enchants = [
     { name: "Sovereign", tier: "S+ Godly", effect: "+80% Luck, +50% Fish Weight, +30% Lure Speed", req: "Sovereign Relic at Keeper's Altar", note: "Extremely rare godly drop" },

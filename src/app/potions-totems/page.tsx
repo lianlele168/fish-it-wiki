@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/potions-totems" },
+};
+
 export default function PotionsTotemsPage() {
   const totems = [
     { name: "Tempest Totem", effect: "Changes active weather to Rain", location: "Hidden Underwater Cave (Terrapin Island)", cost: "2,000 C$", note: "Essential for Ghost Angler & rainy Mythics" },

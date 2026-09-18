@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/quests-merchants" },
+};
+
 export default function QuestsMerchantsPage() {
   const npcs = [
     { name: "Dr. Monty", loc: "Outer Deep Lab (The Deep - Beacon 1P-2)", quest: "Halibut Harpoon Questline", reward: "Halibut Harpoon (Hybrid Rod + Harpoon)", req: "Level 150+" },

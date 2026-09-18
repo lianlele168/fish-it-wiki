@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/rod-tier-list" },
+};
+
 export default function RodTierListPage() {
   const tiers = [
     {

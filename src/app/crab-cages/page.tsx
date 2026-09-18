@@ -1,3 +1,7 @@
+export const metadata = {
+  alternates: { canonical: "https://fishit.robloxwikihub.com/crab-cages" },
+};
+
 export default function CrabCagesPage() {
   const cages = [
     { name: "Golden Crab Cage", luck: "50%", speed: "70%", doubleCatch: "40%", location: "Crowned Ruins / Tidefall Castle", note: "Top passive income cage" },
