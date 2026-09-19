@@ -43,6 +43,7 @@ export default function Footer() {
 
         <div className="border-t border-sky-900/30 pt-6 text-center text-slate-500 text-[11px]">
           <p>© {new Date().getFullYear()} Fish It! Wiki — Community database and utility toolset for Roblox Fish It! by Fish Atelier.</p>
+          <p className="mt-2">Content AI-assisted, human-reviewed · Data sources cited on page · Contact: lianlele168@gmail</p>
         </div>
       </div>
     </footer>

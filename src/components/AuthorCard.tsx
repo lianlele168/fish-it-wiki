@@ -7,17 +7,17 @@ export default function AuthorCard() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg shadow-cyan-500/20">
-            FI
+            H
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-white text-sm sm:text-base">CaptainFisher_Finn</span>
+              <span className="font-bold text-white text-sm sm:text-base">Hlele</span>
               <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-                <ShieldCheck className="w-3 h-3" /> Master Angler
+                <ShieldCheck className="w-3 h-3" /> Editor
               </span>
             </div>
             <p className="text-xs text-cyan-300">
-              Roblox Fish It! Top 50 Angler & Economy Researcher • 3,000+ Mythic Catches Recorded
+              Editor • AI-assisted research, human-reviewed
             </p>
           </div>
         </div>
@@ -36,9 +36,9 @@ export default function AuthorCard() {
 
       <p className="text-xs text-cyan-400/80 mt-3 pt-3 border-t border-cyan-900/40 leading-relaxed">
         <strong>Review Methodology:</strong> Every rod price, luck %, fish location and rarity odd on
-        this site is sourced from the Fish It! Wiki (fish-it.fandom.com) and cross-verified with at
-        least one media guide (Beebom, Pocket Tactics, TheGamer, Eldorado.gg). Unverified values are
-        labeled &quot;Not documented&quot; instead of estimated.
+        this site is compiled with AI-assisted research and cross-verified against multiple sources,
+        including the Fish It! Wiki (fish-it.fandom.com) and at least one media guide (Beebom, Pocket
+        Tactics, TheGamer, Eldorado.gg). Unverified values are labeled &quot;Not documented&quot; instead of estimated.
       </p>
     </div>
   );
