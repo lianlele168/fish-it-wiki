@@ -33,7 +33,7 @@ export default function Navbar() {
                 FISH IT! <span className="text-sky-400">WIKI</span>
               </span>
               <span className="block text-[10px] text-sky-400/80 font-mono -mt-1 uppercase tracking-widest">
-                Roblox Fisch Database
+                Roblox Fish It Database
               </span>
             </div>
           </Link>

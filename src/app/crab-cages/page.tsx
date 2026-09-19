@@ -3,38 +3,54 @@ export const metadata = {
 };
 
 export default function CrabCagesPage() {
-  const cages = [
-    { name: "Golden Crab Cage", luck: "50%", speed: "70%", doubleCatch: "40%", location: "Crowned Ruins / Tidefall Castle", note: "Top passive income cage" },
-    { name: "Relic Crab Cage", luck: "40%", speed: "50%", doubleCatch: "25%", location: "Sunken Reliquary (Mella)", note: "Can be placed in any liquid" },
-    { name: "Heavy Iron Cage", luck: "25%", speed: "30%", doubleCatch: "10%", location: "Roslit Bay Merchant", note: "Mid-game passive farming" },
-    { name: "Wooden Crab Cage", luck: "10%", speed: "15%", doubleCatch: "0%", location: "Moosewood Shop", note: "Starter cage" },
-  ];
-
   return (
     <div className="space-y-8">
       <div className="border-b border-slate-800 pb-4">
-        <h1 className="text-3xl font-black text-white">Fish It! Crab Cages Passive Farm Guide 🦀</h1>
-        <p className="text-slate-400 text-sm mt-1">Set up Golden and Relic Crab Cages across islands for 24/7 passive C$ income and rare crab catches.</p>
+        <h1 className="text-3xl font-black text-white">Fish It! Crab Cages & Passive Farming</h1>
+        <p className="text-slate-400 text-sm mt-1">
+          What is verified about passive farming in Roblox Fish It! — and what is not.
+        </p>
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
-        <div className="divide-y divide-slate-800">
-          {cages.map((c) => (
-            <div key={c.name} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
-              <div className="space-y-1 w-48">
-                <div className="font-bold text-white text-base">{c.name}</div>
-                <div className="text-slate-400">📍 {c.location}</div>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 flex-1">
-                <div>Luck Boost: <strong className="text-emerald-400 text-sm">{c.luck}</strong></div>
-                <div>Lure Speed: <strong className="text-sky-300 text-sm">{c.speed}</strong></div>
-                <div>Double Catch: <strong className="text-purple-300">{c.doubleCatch}</strong></div>
-              </div>
-              <div className="text-slate-400 italic text-xs max-w-xs">{c.note}</div>
-            </div>
-          ))}
-        </div>
+      <div className="bg-amber-950/30 border border-amber-800/50 rounded-2xl p-5 space-y-2">
+        <h2 className="text-sm font-bold text-amber-300">Data Verification Notice</h2>
+        <p className="text-xs text-slate-300 leading-relaxed">
+          A verified crab cage table (names, luck boosts, double-catch rates, prices) is{" "}
+          <strong>not available for Fish It!</strong> The sources checked on 2026-09-19 (Fish It!
+          Wiki, Beebom, Pocket Tactics, Eldorado.gg) do not document crab cage stats, and the cage
+          list that used to be on this page could not be confirmed for this game — it has been
+          removed rather than left up as misinformation.
+        </p>
+        <p className="text-xs text-slate-300 leading-relaxed">
+          This page will be filled in as soon as a reliable, cross-checkable source appears.
+        </p>
       </div>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-bold text-white">Verified Ways to Earn C$ While You Play</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+            <h3 className="text-sm font-bold text-sky-300">Grind Kohana Volcano</h3>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Beebom identifies Kohana Volcano as Fish It&apos;s best money-making location. Pair it
+              with a high-luck rod — Lucky Rod (140%) or better — and sell documented catches like
+              Swordfish (40–60 C$ each).
+            </p>
+          </div>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
+            <h3 className="text-sm font-bold text-sky-300">Redeem codes at Level 10</h3>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Codes such as PIRATEMAJA and DIVING grant 2x Luck II Potions, which boost your catch
+              quality for free. See the codes page for the full verified list.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <p className="text-[11px] text-slate-500">
+        Fish It! is a separate game from Fisch — passive-farming items from other fishing games are
+        intentionally excluded.
+      </p>
     </div>
   );
 }

@@ -1,85 +1,127 @@
+/**
+ * Fish It! (Roblox) — Verified Data Layer
+ *
+ * Every entry below is sourced from the real-data verification file
+ * (tier1-rescue/real-data/fishit.md), cross-checked between the Fish It! Wiki
+ * (fish-it.fandom.com) and at least one media source (Beebom / Pocket Tactics /
+ * TheGamer / Eldorado.gg) on 2026-09-19.
+ *
+ * Fish It! is a separate game from Fisch: no Fisch locations (Moosewood,
+ * Roslit Bay, Terrapin, Snowcap, Sunstone) appear anywhere in this file.
+ * Luck values are percentages (%), prices are in C$.
+ * Fields that could not be verified are marked "Not documented" — no invented data.
+ */
+
 export interface FishingRod {
   id: string;
   name: string;
-  tier: 'Mythic' | 'Legendary' | 'Epic' | 'Rare' | 'Basic';
-  luck: number;
-  speed: number;
-  resilience: number;
+  /** Verified price in C$, or "Free (default)" for the starter rod. */
   price: string;
+  /** Verified luck bonus as a percentage number (e.g. 140 = 140%). */
+  luck: number;
+  /** Verified lure-speed bonus as a percentage number (e.g. 25 = 25%). */
+  speed: number;
+  /** Verified max load in kg. */
+  maxWeight: number;
+  /** Verified source / purchase location. */
   location: string;
 }
 
-export interface FishBait {
-  id: string;
-  name: string;
-  luckBonus: number;
-  speedBonus: number;
-  cost: number;
-  preferredFish: string;
-}
+export type FishRarity =
+  | 'Common'
+  | 'Uncommon'
+  | 'Rare'
+  | 'Epic'
+  | 'Legendary'
+  | 'Mythical'
+  | 'Secret';
 
 export interface FishSpecies {
   id: string;
   name: string;
-  rarity: 'Mythic' | 'Legendary' | 'Epic' | 'Rare' | 'Uncommon' | 'Common';
-  baseValue: number;
+  rarity: FishRarity;
+  /** Verified encounter odds, e.g. "1 in 5" or "1 in 20,000". */
+  rarityOdds: string;
+  /** Verified spawn location(s) — Fish It! locations only. */
   spawnZone: string;
-  preferredWeather: string;
-  description: string;
+  /** Verified sell price range in C$, or "Not documented (varies with weight)". */
+  sellPrice: string;
 }
 
-export interface FishCode {
-  id: string;
-  code: string;
-  reward: string;
-  status: 'ACTIVE' | 'EXPIRED';
-  dateAdded: string;
-}
-
+/**
+ * 15 verified rods — Fisherman Island shop is the verified purchase hub for
+ * all non-starter rods (Fish It! Wiki Fishing Rods page).
+ */
 export const RODS_DATA: FishingRod[] = [
-  { id: 'diamond-rod', name: 'Diamond Rod', tier: 'Mythic', luck: 1300, speed: 167, resilience: 95, price: 'C$ 1,500,000', location: 'Deep Trenches Merchant' },
-  { id: 'element-rod', name: 'Element Rod', tier: 'Mythic', luck: 1111, speed: 130, resilience: 90, price: 'C$ 850,000', location: 'Elemental Shrine' },
-  { id: 'oscar-rod', name: 'Great Rod of Oscar', tier: 'Legendary', luck: 1050, speed: 140, resilience: 88, price: 'C$ 600,000', location: 'Forsaken Shore NPC' },
-  { id: 'ghostfinn-rod', name: 'Ghostfinn Rod', tier: 'Legendary', luck: 950, speed: 120, resilience: 85, price: 'C$ 450,000', location: 'Ghost Ship Wreck' },
-  { id: 'scalding-hook', name: 'Scalding Hook (T7)', tier: 'Epic', luck: 880, speed: 115, resilience: 80, price: 'C$ 280,000', location: 'Volcanic Springs' },
-  { id: 'carbon-rod', name: 'Carbon Rod', tier: 'Rare', luck: 450, speed: 80, resilience: 65, price: 'C$ 75,000', location: 'Roslit Harbour' },
-  { id: 'plastic-rod', name: 'Reinforced Plastic Rod', tier: 'Basic', luck: 150, speed: 40, resilience: 45, price: 'C$ 12,000', location: 'Starter Tackle' },
-  { id: 'flimsy-rod', name: 'Flimsy Bamboo Rod', tier: 'Basic', luck: 50, speed: 10, resilience: 20, price: 'C$ 500', location: 'Moosewood Dock' }
+  { id: 'starter-rod', name: 'Starter Rod', price: 'Free (default)', luck: 0, speed: 0, maxWeight: 10, location: 'Given to every new player at the start' },
+  { id: 'bottle-rod', name: 'Bottle Rod', price: '300 C$', luck: 20, speed: 0, maxWeight: 30, location: 'Fisherman Island shop' },
+  { id: 'carbon-rod', name: 'Carbon Rod', price: '900 C$', luck: 30, speed: 4, maxWeight: 20, location: 'Fisherman Island shop' },
+  { id: 'plastic-rod', name: 'Plastic Rod', price: '1,500 C$', luck: 15, speed: 0, maxWeight: 45, location: 'Fisherman Island shop' },
+  { id: 'chrome-rod', name: 'Chrome Rod', price: '6,500 C$', luck: 80, speed: 3, maxWeight: 50, location: 'Fisherman Island shop' },
+  { id: 'fluorescent-rod', name: 'Fluorescent Rod', price: '9,000 C$', luck: 85, speed: 0, maxWeight: 50, location: 'Fisherman Island shop' },
+  { id: 'lucky-rod', name: 'Lucky Rod', price: '15,000 C$', luck: 140, speed: 0, maxWeight: 40, location: 'Fisherman Island shop' },
+  { id: 'kiwichi-rod', name: 'Kiwichi Rod', price: '15,000 C$', luck: 110, speed: 1, maxWeight: 80, location: 'Fisherman Island shop' },
+  { id: 'dark-blade-rod', name: 'Dark Blade (Solo) Rod', price: '50,000 C$', luck: 200, speed: 15, maxWeight: 60, location: 'Fisherman Island shop' },
+  { id: 'ghostfire-rod', name: 'Ghostfire Rod', price: '55,000 C$', luck: 180, speed: 20, maxWeight: 80, location: 'Fisherman Island shop' },
+  { id: 'red-ghostfire-rod', name: 'Red Ghostfire Rod', price: '55,000 C$', luck: 180, speed: 20, maxWeight: 80, location: 'Ghostfire variant' },
+  { id: 'korig-rod', name: 'Korig Rod', price: '75,000 C$', luck: 250, speed: 25, maxWeight: 80, location: 'Fisherman Island shop' },
+  { id: 'ares-rod', name: 'Ares Rod', price: '100,000 C$', luck: 300, speed: 25, maxWeight: 500, location: 'Fisherman Island shop' },
+  { id: 'lava-rod', name: 'Lava Rod', price: '175,000 C$', luck: 200, speed: 0, maxWeight: 500, location: 'Fisherman Island shop' },
+  { id: 'steampunk-rod', name: 'Steampunk Rod', price: '215,000 C$', luck: 175, speed: 30, maxWeight: 700, location: 'Fisherman Island shop' },
 ];
 
-export const BAITS_DATA: FishBait[] = [
-  { id: 'singularity-bait', name: 'Singularity Bait', luckBonus: 300, speedBonus: 50, cost: 2500, preferredFish: 'Void Kraken, Celestial Ray' },
-  { id: 'aether-bait', name: 'Aether Glow Bait', luckBonus: 200, speedBonus: 35, cost: 1200, preferredFish: 'Prismatic Trout, Phantom Eel' },
-  { id: 'dark-matter-bait', name: 'Dark Matter Nugget', luckBonus: 150, speedBonus: 25, cost: 800, preferredFish: 'Abyssal Angler, Shadow Bass' },
-  { id: 'golden-shrimp', name: 'Golden Sugar Shrimp', luckBonus: 100, speedBonus: 20, cost: 400, preferredFish: 'Golden Koi, Sunfish' },
-  { id: 'nightcrawler', name: 'Glow Nightcrawler', luckBonus: 50, speedBonus: 15, cost: 150, preferredFish: 'River Salmon, Perch' },
-  { id: 'basic-worm', name: 'Common Earthworm', luckBonus: 10, speedBonus: 5, cost: 10, preferredFish: 'Minnow, Carp' }
-];
-
+/**
+ * 22 verified fish — rarity and location from the Fish It! Wiki Fish Index,
+ * sell prices (where visible) from TheGamer's Fish It fish price list.
+ * Sell prices float with fish weight; the values are common ranges.
+ * Fish with no verifiable sell price are marked "Not documented".
+ */
 export const FISH_SPECIES_DATA: FishSpecies[] = [
-  { id: 'void-kraken', name: 'Void Leviathan Kraken', rarity: 'Mythic', baseValue: 125000, spawnZone: 'Mineshaft Abyss', preferredWeather: 'Solar Eclipse', description: 'Colossal eldritch cephalopod dwelling in the deepest radioactive sinkholes.' },
-  { id: 'celestial-ray', name: 'Celestial Manta Ray', rarity: 'Mythic', baseValue: 95000, spawnZone: 'Forsaken Ocean', preferredWeather: 'Aurora Borealis', description: 'Luminescent ray emitting starlight ripples across the ocean surface.' },
-  { id: 'prismatic-trout', name: 'Prismatic Rainbow Trout', rarity: 'Legendary', baseValue: 45000, spawnZone: 'Living Garden Waterfall', preferredWeather: 'Rainstorm', description: 'Scales refract full light spectrum into prismatic flashes.' },
-  { id: 'phantom-eel', name: 'Spectral Phantom Eel', rarity: 'Legendary', baseValue: 38000, spawnZone: 'Ghostwreck Shoals', preferredWeather: 'Dense Fog', description: 'Translucent predator that slips through ordinary nets.' },
-  { id: 'abyssal-angler', name: 'Abyssal Viper Angler', rarity: 'Legendary', baseValue: 32000, spawnZone: 'Mineshaft Floor', preferredWeather: 'Midnight', description: 'Bioluminescent lure that hypnotizes surrounding deep-sea fauna.' },
-  { id: 'golden-koi', name: 'Imperial Golden Koi', rarity: 'Epic', baseValue: 18000, spawnZone: 'Zen Shrine Pond', preferredWeather: 'Clear Sky', description: 'Auspicious fish granting lucky aura to lucky anglers.' },
-  { id: 'volcano-magma-bass', name: 'Obsidian Magma Bass', rarity: 'Epic', baseValue: 15000, spawnZone: 'Volcanic Springs', preferredWeather: 'Ash Rain', description: 'Armored scales withstand boiling sulfur temperatures.' },
-  { id: 'great-white-apex', name: 'Apex Great White Shark', rarity: 'Epic', baseValue: 12000, spawnZone: 'Open Deep Waters', preferredWeather: 'Chop Waves', description: 'Fierce apex hunter requiring high resilience rods to reel in.' },
-  { id: 'swordfish-gladiator', name: 'Atlantic Gladiator Swordfish', rarity: 'Rare', baseValue: 6500, spawnZone: 'Roslit Bay', preferredWeather: 'Windy', description: 'Fast-swimming game fish with needle-sharp bill.' },
-  { id: 'neon-jellyfish', name: 'Phosphor Neon Jelly', rarity: 'Rare', baseValue: 4800, spawnZone: 'Coral Reefs', preferredWeather: 'Night', description: 'Pulsing electric bells illuminate dark undersea caverns.' },
-  { id: 'king-salmon', name: 'Pacific King Salmon', rarity: 'Rare', baseValue: 3500, spawnZone: 'Moosewood Rapids', preferredWeather: 'Rain', description: 'Strong river runner providing steady mid-tier profits.' },
-  { id: 'tiger-trout', name: 'Striped Tiger Trout', rarity: 'Uncommon', baseValue: 1800, spawnZone: 'Moosewood River', preferredWeather: 'Any', description: 'Aggressive predatory freshwater trout.' },
-  { id: 'emerald-bass', name: 'Emerald Largemouth Bass', rarity: 'Uncommon', baseValue: 1200, spawnZone: 'Roslit Pond', preferredWeather: 'Sunny', description: 'Common sportfish caught using basic lures.' },
-  { id: 'clownfish-coral', name: 'Anemone Clownfish', rarity: 'Common', baseValue: 450, spawnZone: 'Shallow Shallows', preferredWeather: 'Clear', description: 'Small colorful reef inhabitant.' },
-  { id: 'bluegill-sun', name: 'Common Bluegill', rarity: 'Common', baseValue: 250, spawnZone: 'Moosewood Docks', preferredWeather: 'Any', description: 'First catch for beginner anglers.' },
-  { id: 'coastal-minnow', name: 'Bait Minnow', rarity: 'Common', baseValue: 80, spawnZone: 'Shoreline', preferredWeather: 'Any', description: 'Used as fresh bait or sold for pocket change.' }
+  { id: 'sardine', name: 'Sardine', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island / Ocean', sellPrice: '2–3 C$' },
+  { id: 'mackerel', name: 'Mackerel', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island / Ocean', sellPrice: '2–4 C$' },
+  { id: 'herring', name: 'Herring', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island / Ocean', sellPrice: '2–3 C$' },
+  { id: 'anchovy', name: 'Anchovy', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island / Ocean', sellPrice: '2–3 C$' },
+  { id: 'bream', name: 'Bream', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island / Ocean', sellPrice: '2–4 C$' },
+  { id: 'tilapia', name: 'Tilapia', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island', sellPrice: '3–5 C$' },
+  { id: 'carp', name: 'Carp', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island', sellPrice: '3–5 C$' },
+  { id: 'catfish', name: 'Catfish', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Fisherman Island', sellPrice: '3–5 C$' },
+  { id: 'tuna', name: 'Tuna', rarity: 'Common', rarityOdds: '1 in 5', spawnZone: 'Ocean', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'flounder', name: 'Flounder', rarity: 'Uncommon', rarityOdds: '1 in 50', spawnZone: 'Fisherman Island', sellPrice: '3–5 C$' },
+  { id: 'halibut', name: 'Halibut', rarity: 'Uncommon', rarityOdds: '1 in 50', spawnZone: 'Fisherman Island', sellPrice: '5–8 C$' },
+  { id: 'salmon', name: 'Salmon', rarity: 'Uncommon', rarityOdds: '1 in 50', spawnZone: 'Ocean', sellPrice: '8–12 C$' },
+  { id: 'mahi-mahi', name: 'Mahi Mahi', rarity: 'Uncommon', rarityOdds: '1 in 50', spawnZone: 'Ocean', sellPrice: '10–15 C$' },
+  { id: 'axolotl', name: 'Axolotl', rarity: 'Uncommon', rarityOdds: '1 in 50', spawnZone: 'Kohana', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'swordfish', name: 'Swordfish', rarity: 'Rare', rarityOdds: '1 in 300', spawnZone: 'Ocean', sellPrice: '40–60 C$' },
+  { id: 'barracuda', name: 'Barracuda', rarity: 'Rare', rarityOdds: '1 in 300', spawnZone: 'Fisherman Island', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'frog', name: 'Frog', rarity: 'Rare', rarityOdds: '1 in 350', spawnZone: 'Fisherman Island', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'pufferfish', name: 'Pufferfish', rarity: 'Rare', rarityOdds: '1 in 350', spawnZone: 'Ocean / Coral Reef', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'darwin-clownfish', name: 'Darwin Clownfish', rarity: 'Rare', rarityOdds: '1 in 750', spawnZone: 'Fisherman Island', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'sea-turtle', name: 'Sea Turtle', rarity: 'Rare', rarityOdds: '1 in 350', spawnZone: 'Kohana / Coral Reef', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'orca', name: 'Orca', rarity: 'Epic', rarityOdds: '1 in 5,000', spawnZone: 'Kohana', sellPrice: 'Not documented (varies with weight)' },
+  { id: 'colossal-squid', name: 'Colossal Squid', rarity: 'Legendary', rarityOdds: '1 in 20,000', spawnZone: 'Kohana', sellPrice: 'Not documented (varies with weight)' },
 ];
 
-export const FISH_CODES_DATA: FishCode[] = [
-  { id: 'code-angler2026', code: 'ANGLER2026', reward: '50,000 C$ + 5x Singularity Bait', status: 'ACTIVE', dateAdded: '' },
-  { id: 'code-deepocean', code: 'DEEPOCEAN', reward: 'Free Carbon Rod + 10x Golden Shrimp', status: 'ACTIVE', dateAdded: '' },
-  { id: 'code-fishatelier', code: 'FISHATELIER', reward: '25,000 C$ + 3x Luck Potion', status: 'ACTIVE', dateAdded: '' },
-  { id: 'code-mineshaft', code: 'MINESHAFT99', reward: 'Super Magnet Lure', status: 'ACTIVE', dateAdded: '' },
-  { id: 'code-krakenhunt', code: 'KRAKENHUNT', reward: '15,000 C$', status: 'ACTIVE', dateAdded: '' },
-  { id: 'code-starterkit', code: 'STARTERBAIT', reward: '50x Earthworms + 5,000 C$', status: 'ACTIVE', dateAdded: '' }
+/**
+ * Verified Fish It! locations (Fish It! Wiki Locations + Pocket Tactics).
+ * These are Fish It!'s own map areas — never replace them with Fisch names.
+ */
+export const LOCATIONS_DATA: string[] = [
+  'Fisherman Island',
+  'Ocean',
+  'Kohana',
+  'Kohana Volcano',
+  'Coral Reef (Tropical Garden)',
+  'Ancient Isle',
+  'Enchant Temple',
+  'Weather Machine',
+  'Esoteric Depths',
+  'The Land of Lost, Forgotten and Discovered',
+  'Winter Shepherd',
+  'Geminian Beach',
 ];
+
+/**
+ * Bait / bobber data: NOT verified. The Fish It! Wiki baits page could not be
+ * retrieved and no cross-checkable numeric bait table exists (2026-09-19), so
+ * no bait entries are shipped here. Do not add bait stats without sources.
+ */

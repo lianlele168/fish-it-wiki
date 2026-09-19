@@ -19,13 +19,13 @@ export default function HomePage() {
       {/* Hero Banner */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-950 via-slate-900 to-[#06121e] border border-sky-800/40 rounded-3xl p-8 sm:p-12 text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/80 border border-sky-700/50 text-sky-300 text-xs font-semibold">
-          🌊 Complete Roblox Fisch Community Database & Toolset
+          🌊 Complete Roblox Fish It! Community Database & Toolset
         </div>
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-          Fish It! <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Wiki (Fisch)</span>
+          Fish It! <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Wiki</span>
         </h1>
         <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-          Active redeem codes, Rod Tier Lists, Catch & Profit Calculator, 100+ Fish Index, Weather Totems, and Keeper's Altar Enchants.
+          Active redeem codes, Rod Tier List, Luck & Rarity Calculator, verified Fish Index, and the best money-making locations — 100% real Fish It! data.
         </p>
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Link href="/codes" className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 hover:to-cyan-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-sky-500/20 text-sm">
@@ -79,15 +79,15 @@ export default function HomePage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
-            { title: "Active Codes", href: "/codes", icon: Gift, color: "text-amber-400", desc: "Working promo codes for free Mutation Potions, Cash, and Relics." },
-            { title: "Rod Tier List", href: "/rod-tier-list", icon: Anchor, color: "text-sky-400", desc: "Diamond Rod (1300% Luck), Element Rod, Carbon Rod — full stat table." },
-            { title: "Profit Calculator", href: "/catch-calculator", icon: Calculator, color: "text-emerald-400", desc: "Select your Rod + Bait + Enchant to estimate C$/Hour and Mythic rate." },
-            { title: "100+ Fish Index", href: "/fish-database", icon: Database, color: "text-cyan-400", desc: "Search species, weather conditions, bait preferences, and sell prices." },
-            { title: "Altar Enchants", href: "/enchantments", icon: Sparkles, color: "text-purple-400", desc: "Sovereign, Greed (+50% Weight), and Santa enchantments guide." },
-            { title: "Weather Totems", href: "/potions-totems", icon: ShieldAlert, color: "text-red-400", desc: "Tempest & Sundial Totem cave locations and potion recipes." },
-            { title: "Boats Speed", href: "/boats-speed", icon: Waves, color: "text-blue-400", desc: "Kayak (100 S/ps), Speedboat, and Hovercraft speed comparison." },
-            { title: "Fishing Spots", href: "/locations-map", icon: Compass, color: "text-emerald-400", desc: "Mineshaft, Forsaken Shores, and Living Garden C$/Hour locations." },
-            { title: "Beginner Guide", href: "/beginner-guide", icon: BookOpen, color: "text-amber-300", desc: "Step-by-step rod progression and anti-shake minigame guide." },
+            { title: "Active Codes", href: "/codes", icon: Gift, color: "text-amber-400", desc: "Working promo codes for free Luck Potions, Mutation Potions, totems and rod skins." },
+            { title: "Rod Tier List", href: "/rod-tier-list", icon: Anchor, color: "text-sky-400", desc: "All 15 verified rods — Carbon Rod (900 C$, 30% luck) up to Steampunk Rod (215,000 C$)." },
+            { title: "Luck Calculator", href: "/calculator", icon: Calculator, color: "text-emerald-400", desc: "Pick a rod and target fish to see luck-adjusted hook odds and estimated C$/hour." },
+            { title: "Fish Index", href: "/fish-database", icon: Database, color: "text-cyan-400", desc: "22 verified species with locations, rarity odds (1 in X) and sell prices." },
+            { title: "Enchanting", href: "/enchantments", icon: Sparkles, color: "text-purple-400", desc: "Enchant your rod at Esoteric Depths — plus verified luck boosters." },
+            { title: "Potions & Totems", href: "/potions-totems", icon: ShieldAlert, color: "text-red-400", desc: "Luck Potions, Mutation Potions and totems granted by working codes." },
+            { title: "Boats & Travel", href: "/boats-speed", icon: Waves, color: "text-blue-400", desc: "Travel by boat to Kohana, Ancient Isle, Winter Shepherd and more." },
+            { title: "Fishing Spots", href: "/locations-map", icon: Compass, color: "text-emerald-400", desc: "All 12 verified locations — Fisherman Island, Kohana Volcano, Coral Reef." },
+            { title: "Beginner Guide", href: "/beginner-guide", desc: "Verified rod progression from the free Starter Rod to the Ares Rod.", icon: BookOpen, color: "text-amber-300" },
           ].map(item => {
             const Icon = item.icon;
             return (

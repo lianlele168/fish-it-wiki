@@ -25,17 +25,20 @@ export default function AuthorCard() {
         <div className="flex flex-wrap items-center gap-3 text-xs text-cyan-300">
           <div className="flex items-center gap-1 bg-cyan-900/50 px-2.5 py-1 rounded-lg border border-cyan-800/40">
             <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Updated: </span>
+            <span>Data Verified: 2026-09-19</span>
           </div>
           <div className="flex items-center gap-1 bg-cyan-900/50 px-2.5 py-1 rounded-lg border border-cyan-800/40">
             <UserCheck className="w-3.5 h-3.5 text-blue-400" />
-            <span>Verified for Patch v2.1 (Deep Trenches)</span>
+            <span>Cross-checked vs Fish It! Wiki + Beebom / Pocket Tactics / TheGamer</span>
           </div>
         </div>
       </div>
 
       <p className="text-xs text-cyan-400/80 mt-3 pt-3 border-t border-cyan-900/40 leading-relaxed">
-        <strong>Review Methodology:</strong> Rod luck multipliers, bait speed buffs, and C$/hour profit formulas were empirically tested across 200+ hours of automated and active fishing in all five game zones.
+        <strong>Review Methodology:</strong> Every rod price, luck %, fish location and rarity odd on
+        this site is sourced from the Fish It! Wiki (fish-it.fandom.com) and cross-verified with at
+        least one media guide (Beebom, Pocket Tactics, TheGamer, Eldorado.gg). Unverified values are
+        labeled &quot;Not documented&quot; instead of estimated.
       </p>
     </div>
   );

@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-sky-900/30 pt-6 text-center text-slate-500 text-[11px]">
-          <p>© {new Date().getFullYear()} Fish It! Wiki — Community database and utility toolset for Roblox Fisch.</p>
+          <p>© {new Date().getFullYear()} Fish It! Wiki — Community database and utility toolset for Roblox Fish It! by Fish Atelier.</p>
         </div>
       </div>
     </footer>

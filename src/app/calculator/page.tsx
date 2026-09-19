@@ -2,41 +2,38 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import AuthorCard from "@/components/AuthorCard";
-import { RODS_DATA, BAITS_DATA } from "@/data/wikiData";
-import { Calculator, Sparkles, Anchor, DollarSign } from "lucide-react";
+import { RODS_DATA, FISH_SPECIES_DATA } from "@/data/wikiData";
+import { Calculator, Anchor, DollarSign, Fish } from "lucide-react";
+
+/** "1 in 20,000" -> 20000 */
+function oddsNumber(odds: string): number {
+  const m = odds.match(/in\s*([\d,]+)/);
+  return m ? Number(m[1].replace(/,/g, "")) : 1;
+}
+
+function priceNumber(price: string): number | null {
+  const m = price.match(/([\d,]+)\s*[–-]\s*([\d,]+)\s*C\$/);
+  if (m) return (Number(m[1].replace(/,/g, "")) + Number(m[2].replace(/,/g, ""))) / 2;
+  const s = price.match(/^([\d,]+)\s*C\$/);
+  return s ? Number(s[1].replace(/,/g, "")) : null;
+}
 
 export default function CalculatorPage() {
-  const SPOTS = [
-    { name: "Mineshaft (Endgame Profit)", avgBasePrice: 1800, catchesPerHrBase: 60 },
-    { name: "Forsaken Shores Pond", avgBasePrice: 1400, catchesPerHrBase: 55 },
-    { name: "Living Garden Waterfall", avgBasePrice: 1100, catchesPerHrBase: 50 },
-    { name: "Roslit Bay Harbor", avgBasePrice: 600, catchesPerHrBase: 45 },
-    { name: "Moosewood Starter Spot", avgBasePrice: 150, catchesPerHrBase: 40 },
-  ];
+  const [selectedRodIdx, setSelectedRodIdx] = useState(2);
+  const [selectedFishIdx, setSelectedFishIdx] = useState(0);
 
-  const ENCHANTS = [
-    { name: "Sovereign / Divine", luckMult: 1.8, weightMult: 1.5 },
-    { name: "Greed (+50% Weight)", luckMult: 1.2, weightMult: 1.5 },
-    { name: "Santa (+30% Speed)", luckMult: 1.3, weightMult: 1.2 },
-    { name: "Mystical", luckMult: 1.4, weightMult: 1.1 },
-    { name: "None", luckMult: 1.0, weightMult: 1.0 },
-  ];
+  const rod = RODS_DATA[selectedRodIdx] ?? RODS_DATA[0];
+  const fish = FISH_SPECIES_DATA[selectedFishIdx] ?? FISH_SPECIES_DATA[0];
 
-  const [selectedRodIdx, setSelectedRodIdx] = useState(0);
-  const [selectedBaitIdx, setSelectedBaitIdx] = useState(0);
-  const [selectedEnchantIdx, setSelectedEnchantIdx] = useState(0);
-  const [selectedSpotIdx, setSelectedSpotIdx] = useState(0);
+  // Luck model (approximate, community-observed): each 100% luck multiplies the
+  // chance of hooking a rarer fish by 2x. Official formula is not documented.
+  const luckMult = 1 + rod.luck / 100;
+  const adjustedOdds = Math.max(1, Math.round(oddsNumber(fish.rarityOdds) / luckMult));
+  const price = priceNumber(fish.sellPrice);
 
-  const r = RODS_DATA[selectedRodIdx] || RODS_DATA[0];
-  const b = BAITS_DATA[selectedBaitIdx] || BAITS_DATA[0];
-  const e = ENCHANTS[selectedEnchantIdx] || ENCHANTS[0];
-  const s = SPOTS[selectedSpotIdx] || SPOTS[0];
-
-  const totalLuck = Math.round((r.luck + b.luckBonus) * e.luckMult);
-  const catchesPerHour = Math.round(s.catchesPerHrBase * (1 + (r.speed + b.speedBonus) / 100));
-  const avgFishPrice = Math.round(s.avgBasePrice * (1 + totalLuck / 400) * e.weightMult);
-  const estimatedPerHour = (catchesPerHour * avgFishPrice).toLocaleString();
-  const mythicChance = Math.min(85, Math.round((totalLuck / 2500) * 100));
+  // Speed model (approximate): base 60 casts/hour, each +10% lure speed adds ~6 casts.
+  const catchesPerHour = Math.round(60 * (1 + rod.speed / 100));
+  const perHour = price !== null ? Math.round((catchesPerHour * price) / adjustedOdds) : null;
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -44,26 +41,26 @@ export default function CalculatorPage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is the best rod setup for maximum profit in Fish It?",
+        name: "What is the best value rod in Fish It?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "The highest earning setup is the Diamond Rod paired with Singularity Bait and the Sovereign/Divine enchantment, fishing exclusively in the Mineshaft zone for up to C$ 500,000+ per hour.",
+          text: "The Carbon Rod is the best early value buy: it costs only 900 C$ at the Fisherman Island shop and gives 30% luck plus 4% lure speed. Later, the Lucky Rod (15,000 C$, 140% luck) and the Ares Rod (100,000 C$, 300% luck, 500 kg) are the major luck upgrades.",
         },
       },
       {
         "@type": "Question",
-        name: "How does Luck affect fish rarity and values?",
+        name: "How does Luck work in Fish It?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Luck increases the chance of hooking Mythic and Legendary species while scaling up the average weight multiplier of common fish, directly boosting their merchant sell price.",
+          text: "Luck is a percentage bonus that increases the chance of hooking rarer fish. Each fish has documented base odds such as 1 in 5 for a Common Sardine or 1 in 20,000 for the Legendary Colossal Squid at Kohana. The exact official formula is not published, so this calculator uses an approximate community model.",
         },
       },
       {
         "@type": "Question",
-        name: "Does fishing location change catch speed in Fish It?",
+        name: "Where is the best money-making spot in Fish It?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes, deeper waters like Mineshaft and Forsaken Shores have slightly slower base bite intervals but contain exponentially higher-value fish tables.",
+          text: "Kohana Volcano is widely reported as the best money-making location in Fish It. Fisherman Island and the surrounding Ocean are the best starting areas, and Kohana is home to high-rarity catches like the Orca (1 in 5,000) and Colossal Squid (1 in 20,000).",
         },
       },
     ],
@@ -72,7 +69,7 @@ export default function CalculatorPage() {
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Fish It Catch & Profit Calculator",
+    name: "Fish It Luck & Rarity Calculator",
     applicationCategory: "GameApplication",
     operatingSystem: "Web",
     offers: {
@@ -95,13 +92,15 @@ export default function CalculatorPage() {
 
       <div className="border-b border-cyan-900/60 pb-5 text-center sm:text-left">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-700/50 text-cyan-300 text-xs font-semibold mb-3">
-          <Calculator className="w-3.5 h-3.5" /> Interactive Fishing Engine
+          <Calculator className="w-3.5 h-3.5" /> Verified Data Calculator
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-white">
-          Fish It! Catch & Profit Calculator
+          Fish It! Luck & Rarity Calculator
         </h1>
         <p className="text-slate-300 text-sm mt-2 max-w-2xl">
-          Simulate rod luck, bait speed, enchantments, and fishing spots to calculate estimated hourly C$ profit and Mythic hook rates.
+          Pick a rod and a target fish to see your luck-adjusted hook odds and estimated C$/hour.
+          All inputs use verified game values (Fish It! Wiki, 2026-09-19); the luck formula itself
+          is an approximate community model since the official math is not documented.
         </p>
       </div>
 
@@ -112,100 +111,85 @@ export default function CalculatorPage() {
         <div className="space-y-5">
           <div className="bg-slate-900/90 border border-cyan-900/60 rounded-2xl p-6 space-y-4">
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Anchor className="w-4 h-4 text-cyan-400" /> 1. Select Fishing Rod
+              <Anchor className="w-4 h-4 text-cyan-400" /> 1. Select Your Rod
             </h2>
             <select
               value={selectedRodIdx}
               onChange={(e) => setSelectedRodIdx(Number(e.target.value))}
               className="w-full bg-slate-950 border border-cyan-800/60 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500"
             >
-              {RODS_DATA.map((rod, idx) => (
-                <option key={rod.id} value={idx}>
-                  {rod.name} (Luck: +{rod.luck}, Spd: +{rod.speed}%)
+              {RODS_DATA.map((r, idx) => (
+                <option key={r.id} value={idx}>
+                  {r.name} — {r.price}, +{r.luck}% luck
                 </option>
               ))}
             </select>
-            <div className="text-xs text-slate-400 flex justify-between">
-              <span>Price: <strong className="text-emerald-400">{r.price}</strong></span>
-              <span>Tier: <strong className="text-cyan-300">{r.tier}</strong></span>
+            <div className="text-xs text-slate-400 flex justify-between flex-wrap gap-2">
+              <span>Luck: <strong className="text-emerald-400">+{rod.luck}%</strong></span>
+              <span>Speed: <strong className="text-cyan-300">+{rod.speed}%</strong></span>
+              <span>Max Weight: <strong className="text-slate-200">{rod.maxWeight} kg</strong></span>
+              <span>Source: <strong className="text-amber-300">{rod.location}</strong></span>
             </div>
           </div>
 
           <div className="bg-slate-900/90 border border-cyan-900/60 rounded-2xl p-6 space-y-4">
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-yellow-400" /> 2. Bait & Enchantment
+              <Fish className="w-4 h-4 text-yellow-400" /> 2. Target Fish
             </h2>
-            <div className="space-y-3">
-              <div>
-                <label className="text-xs text-slate-400 block mb-1 font-semibold">Active Bait</label>
-                <select
-                  value={selectedBaitIdx}
-                  onChange={(e) => setSelectedBaitIdx(Number(e.target.value))}
-                  className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-cyan-500"
-                >
-                  {BAITS_DATA.map((bait, idx) => (
-                    <option key={bait.id} value={idx}>
-                      {bait.name} (+{bait.luckBonus} Luck)
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="text-xs text-slate-400 block mb-1 font-semibold">Rod Enchantment</label>
-                <select
-                  value={selectedEnchantIdx}
-                  onChange={(e) => setSelectedEnchantIdx(Number(e.target.value))}
-                  className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-cyan-500"
-                >
-                  {ENCHANTS.map((enc, idx) => (
-                    <option key={enc.name} value={idx}>
-                      {enc.name} ({enc.luckMult}x Luck Mult)
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="text-xs text-slate-400 block mb-1 font-semibold">Fishing Destination</label>
-                <select
-                  value={selectedSpotIdx}
-                  onChange={(e) => setSelectedSpotIdx(Number(e.target.value))}
-                  className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-cyan-500"
-                >
-                  {SPOTS.map((spot, idx) => (
-                    <option key={spot.name} value={idx}>
-                      {spot.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <select
+              value={selectedFishIdx}
+              onChange={(e) => setSelectedFishIdx(Number(e.target.value))}
+              className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500"
+            >
+              {FISH_SPECIES_DATA.map((f, idx) => (
+                <option key={f.id} value={idx}>
+                  {f.name} ({f.rarity}, {f.rarityOdds})
+                </option>
+              ))}
+            </select>
+            <div className="text-xs text-slate-400 flex justify-between flex-wrap gap-2">
+              <span>Location: <strong className="text-cyan-300">{fish.spawnZone}</strong></span>
+              <span>Sell Price: <strong className="text-emerald-400">{fish.sellPrice}</strong></span>
             </div>
           </div>
         </div>
 
-        {/* Results & Visuals */}
+        {/* Results */}
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-cyan-950/80 to-slate-950 border border-cyan-500/40 rounded-2xl p-6 space-y-4">
             <h2 className="text-xs font-black uppercase tracking-wider text-cyan-400">
-              Estimated Hourly Earnings
+              {fish.name} — Hook Chances
             </h2>
-            <div className="text-4xl sm:text-5xl font-black text-white font-mono">
-              C$ {estimatedPerHour}
-              <span className="text-sm font-sans font-medium text-slate-400 ml-2">/ Hour</span>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
+                <div className="text-[11px] text-slate-400 uppercase tracking-wide">Base Odds</div>
+                <div className="text-xl font-black text-slate-200 font-mono mt-1">{fish.rarityOdds}</div>
+              </div>
+              <div className="bg-slate-950/70 border border-cyan-800/60 rounded-xl p-4">
+                <div className="text-[11px] text-cyan-400 uppercase tracking-wide">With {rod.name}</div>
+                <div className="text-xl font-black text-cyan-300 font-mono mt-1">1 in {adjustedOdds.toLocaleString()}</div>
+              </div>
             </div>
             <div className="pt-3 border-t border-cyan-900/50 space-y-2 text-xs text-slate-300">
               <div className="flex justify-between">
-                <span>Total Combined Luck:</span>
-                <span className="font-bold text-yellow-300 font-mono">+{totalLuck}</span>
+                <span>Estimated casts / hour (speed model):</span>
+                <span className="font-bold text-cyan-300 font-mono">~{catchesPerHour}</span>
               </div>
               <div className="flex justify-between">
-                <span>Catch Rate Speed:</span>
-                <span className="font-bold text-cyan-300">~{catchesPerHour} fish / hr</span>
+                <span>Estimated C$ / hour:</span>
+                <span className="font-bold text-emerald-400 font-mono">
+                  {perHour !== null ? `~${perHour.toLocaleString()} C$` : "— (sell price not documented)"}
+                </span>
               </div>
               <div className="flex justify-between">
-                <span>Mythic Hook Probability:</span>
-                <span className="font-bold text-emerald-400 font-mono">{mythicChance}%</span>
+                <span>Rod total luck:</span>
+                <span className="font-bold text-yellow-300 font-mono">+{rod.luck}%</span>
               </div>
             </div>
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              Model note: base odds are verified in-game values. The luck-to-odds conversion is a
+              community approximation — Fish It&apos;s official luck formula has not been published.
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -232,6 +216,13 @@ export default function CalculatorPage() {
           </div>
         </div>
       </div>
+
+      <p className="text-[11px] text-slate-500 flex items-start gap-2">
+        <DollarSign className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        Sell prices float with fish weight; ranges come from TheGamer&apos;s verified price list.
+        Fish marked &quot;Not documented&quot; have no verifiable sell price yet and show no C$/hour
+        estimate instead of a made-up number.
+      </p>
     </div>
   );
 }
